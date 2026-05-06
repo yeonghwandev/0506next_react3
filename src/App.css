@@ -74,3 +74,96 @@ button {
   font-family: inherit;
   cursor: pointer;
 }
+
+/* ── 별명 슬롯머신 ── */
+.nickname-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.slot-machine {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.slot-box {
+  width: 160px;
+  height: 90px;
+  background: #111;
+  border: 3px solid #e94560;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 16px rgba(233, 69, 96, 0.3);
+}
+
+.slot-item {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  display: block;
+}
+
+.slot-item.spinning {
+  animation: slideUp 0.08s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slot-divider {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #555;
+  white-space: nowrap;
+}
+
+.spin-button {
+  appearance: none;
+  border: none;
+  background: #111;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 14px 40px;
+  border-radius: 999px;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.spin-button:hover:not(:disabled) {
+  background: #e94560;
+  transform: scale(1.04);
+}
+
+.spin-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.slot-result {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #e94560;
+  margin: 0;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
