@@ -84,7 +84,7 @@ function TeamIntro({ teamName, members }) {
                 textAlign: 'center',
                 transition: 'transform 0.6s',
                 transformStyle: 'preserve-3d',
-                transform: flipped[member] ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                transform: flipped[member.name] ? 'rotateY(180deg)' : 'rotateY(0deg)'
               }}
             >
               {/* 앞면: 멤버 이름과 사진 */}
