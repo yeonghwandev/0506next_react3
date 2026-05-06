@@ -11,8 +11,8 @@ const NICKNAMES = ["잠만보", "늙은이", "파닭러버", "엽사장인"];
 
 // teamName은 헤더 표시용, members는 왼쪽 슬롯의 이름 풀로 사용
 function NicknameSlot({ teamName, members }) {
-  // 왼쪽 슬롯에 현재 보여줄 멤버 이름, 초기값은 첫 번째 멤버
-  const [currentMember, setCurrentMember] = useState(members[0]);
+  // 왼쪽 슬롯에 현재 보여줄 멤버 이름, members가 객체 배열이므로 .name으로 꺼냄
+  const [currentMember, setCurrentMember] = useState(members[0].name);
   // 오른쪽 슬롯에 현재 보여줄 별명, 초기값은 첫 번째 별명
   const [currentNickname, setCurrentNickname] = useState(NICKNAMES[0]);
   // 슬롯이 돌고 있는지 여부, 버튼 클릭으로 true가 됨
@@ -27,10 +27,12 @@ function NicknameSlot({ teamName, members }) {
 
     // 80ms마다 멤버와 별명을 무작위로 교체하는 인터벌 등록
     const interval = setInterval(() => {
-      // members 배열 길이 안에서 무작위 인덱스를 골라 멤버 갱신
-      setCurrentMember(members[Math.floor(Math.random() * members.length)]);
+      // members 배열 길이 안에서 무작위 인덱스를 골라 .name으로 이름만 꺼내 갱신
+      setCurrentMember(members[Math.floor(Math.random() * members.length)].name);
       // NICKNAMES 배열 길이 안에서 무작위 인덱스를 골라 별명 갱신
-      setCurrentNickname(NICKNAMES[Math.floor(Math.random() * NICKNAMES.length)]);
+      setCurrentNickname(
+        NICKNAMES[Math.floor(Math.random() * NICKNAMES.length)],
+      );
       // animKey를 1씩 올려서 span이 리마운트되고 슬라이드 애니메이션이 다시 실행됨
       setAnimKey((k) => k + 1);
     }, 80);
@@ -45,7 +47,7 @@ function NicknameSlot({ teamName, members }) {
       clearInterval(interval);
       clearTimeout(timer);
     };
-  // isSpinning 또는 members가 바뀔 때 이 effect를 다시 실행
+    // isSpinning 또는 members가 바뀔 때 이 effect를 다시 실행
   }, [isSpinning, members]);
 
   // 돌리기 버튼을 눌렀을 때 스핀을 시작하는 핸들러
