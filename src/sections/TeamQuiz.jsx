@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────
 //  TeamQuiz — 미니 퀴즈
-//  담당자: 안유진
+//  담당자: 안성진
 // ─────────────────────────────────────────────
 
 import { useState, useEffect } from "react";
@@ -20,19 +20,19 @@ function TeamQuiz({ teamName, members }) {
 
   // 퀴즈 질문 3개와 정답 번호를 저장한다
   const QUESTIONS = [
-  {
-    question: "우리 팀에서 팀장을 자처한 사람은?",
-    answerIndex: 0,
-  },
-  {
-    question: "오늘 코를 풀다 코가 헌 사람은?",
-    answerIndex: 3,
-  },
-  {
-    question: "오늘 캐리어 끌고 온 사람은?",
-    answerIndex: 2,
-  },
-];
+    {
+      question: "우리 팀에서 팀장을 자처한 사람은?",
+      answerIndex: 0,
+    },
+    {
+      question: "오늘 코를 풀다 코가 헌 사람은?",
+      answerIndex: 3,
+    },
+    {
+      question: "오늘 캐리어 끌고 온 사람은?",
+      answerIndex: 2,
+    },
+  ];
 
   // 현재 문제 번호에 맞는 문제를 꺼낸다
   const currentQuestion = QUESTIONS[currentIndex];
@@ -47,7 +47,7 @@ function TeamQuiz({ teamName, members }) {
 
     // 선택한 보기 번호가 정답 번호와 같으면 점수를 올린다
     if (index === currentQuestion.answerIndex) {
-      setScore(score + 1);
+      setScore((prevScore) => prevScore + 1);
     }
   };
 
@@ -60,7 +60,7 @@ function TeamQuiz({ teamName, members }) {
     const timer = setTimeout(() => {
       // 마지막 문제가 아니면 다음 문제로 이동한다
       if (currentIndex < QUESTIONS.length - 1) {
-        setCurrentIndex(currentIndex + 1);
+        setCurrentIndex((prevIndex) => prevIndex + 1);
         setSelectedAnswer(null);
       } else {
         setIsFinished(true);
@@ -78,6 +78,16 @@ function TeamQuiz({ teamName, members }) {
     setSelectedAnswer(null);
     setIsFinished(false);
   };
+
+  // members 데이터가 없거나 4명보다 적으면 안내 문구를 보여준다
+  if (!members || members.length < 4) {
+    return (
+      <section className="card">
+        <h2>{teamName} 미니 퀴즈</h2>
+        <p>팀원 정보 4명이 필요합니다.</p>
+      </section>
+    );
+  }
 
   // 퀴즈가 끝났을 때 결과 화면을 보여준다
   if (isFinished) {
@@ -107,11 +117,11 @@ function TeamQuiz({ teamName, members }) {
       <div className="quiz-options">
         {members.map((member, index) => (
           <button
-            key={member}
+            key={member.name}
             onClick={() => handleAnswerClick(index)}
             disabled={selectedAnswer !== null}
           >
-            {member}
+            {member.name}
           </button>
         ))}
       </div>
@@ -120,7 +130,9 @@ function TeamQuiz({ teamName, members }) {
         <p>
           {selectedAnswer === currentQuestion.answerIndex
             ? "정답입니다!"
-            : `오답입니다! 정답은 ${members[currentQuestion.answerIndex]}입니다.`}
+            : `오답입니다! 정답은 ${
+                members[currentQuestion.answerIndex].name
+              }입니다.`}
         </p>
       )}
 
