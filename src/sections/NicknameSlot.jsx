@@ -10,7 +10,7 @@ function NicknameSlot({ teamName, members }) {
 
   return (
     <section className="card">
-      <h2>{teamName} 별명 슬롯머신</h2>
+      <h2>{teamName} 별명 슬롯머신dd</h2>
     </section>
   );
 }
