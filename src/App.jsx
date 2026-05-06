@@ -8,8 +8,13 @@ import NicknameSlot from "./sections/NicknameSlot";
 // ─────────────────────────────────────────────
 //  ✏️  팀에서 이 부분만 직접 채워주세요
 // ─────────────────────────────────────────────
-const TEAM_NAME = "여기에 팀명";
-const MEMBERS = ["멤버1", "멤버2", "멤버3", "멤버4"];
+const TEAM_NAME = "01.75";
+const MEMBERS = [
+  { name: "조영환", birthYear: "01년생" },
+  { name: "송현섭", birthYear: "02년생" },
+  { name: "안유진", birthYear: "02년생" },
+  { name: "김예은", birthYear: "02년생" }
+];
 // ─────────────────────────────────────────────
 
 const TABS = [
